@@ -1,0 +1,48 @@
+name: Docker Image CI
+
+
+on:
+  pull_request:
+    branches: [ '*' ]
+
+env:
+  GOPRIVATE: "github.com/opensourceways"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+
+jobs:
+  build:
+    runs-on: self-ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: cleanup
+      run: rm -f ~/.netrc
+       
+    - name: Set Login Credentials
+      env:
+        TOKEN: ${{ secrets.ZYK_PERSONAL_TOKEN }}
+        USER: ${{ secrets.ZYK_USER_NAME }}
+      run: echo "machine github.com login $USER password $TOKEN" > ~/.netrc
+
+    - name: Run Gosec Security Scanner
+      uses: securego/gosec@master
+      env:
+        GITHUB_AUTHENTICATION_TOKEN: ${{ secrets.ZYK_PERSONAL_TOKEN }}
+      with:
+        args: ./...
+
+    - name: cleanup
+      run: rm -f ~/.netrc
+
+    - name: Build the message Docker image 
+      run:  |
+          docker build --file Dockerfile \
+            --build-arg USER=${{ secrets.ZYK_USER_NAME }} \
+            --build-arg PASS=${{ secrets.ZYK_PERSONAL_TOKEN }} \
+            --tag server:$(date +%s) .
+    
