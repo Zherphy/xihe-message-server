@@ -1,6 +1,6 @@
 module github.com/opensourceways/xihe-message-server
 
-go 1.21.8
+go 1.21
 
 require (
 	github.com/opensourceways/community-robot-lib v1.0.1

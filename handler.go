@@ -4,8 +4,6 @@ import (
 	"errors"
 	"time"
 
-	"github.com/sirupsen/logrus"
-
 	asyncapp "github.com/opensourceways/xihe-extra-services/async-server/app"
 	"github.com/opensourceways/xihe-server/app"
 	cloudapp "github.com/opensourceways/xihe-server/cloud/app"
@@ -13,6 +11,7 @@ import (
 	"github.com/opensourceways/xihe-server/domain"
 	"github.com/opensourceways/xihe-server/domain/message"
 	"github.com/opensourceways/xihe-server/domain/repository"
+	"github.com/sirupsen/logrus"
 )
 
 var _ message.EventHandler = (*handler)(nil)
@@ -230,6 +229,7 @@ func (h *handler) HandleEventCreateFinetune(index *domain.FinetuneIndex) error {
 
 			return err
 		},
+
 		10*time.Second,
 	)
 }

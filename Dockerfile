@@ -9,8 +9,8 @@ RUN echo "machine github.com login $USER password $PASS" > /root/.netrc
 RUN go env -w GOPRIVATE=github.com/opensourceways
 
 # build binary
-COPY . /go/src/github.com/opensourceways/xihe-extra-services
-RUN cd /go/src/github.com/opensourceways/xihe-extra-services/message-server && GO111MODULE=on CGO_ENABLED=0 go build -buildmode=pie --ldflags "-s -linkmode 'external' -extldflags '-Wl,-z,now'"
+COPY . /go/src/github.com/opensourceways/xihe-message-server
+RUN cd /go/src/github.com/opensourceways/xihe-message-server && GO111MODULE=on CGO_ENABLED=0 go build -buildmode=pie --ldflags "-s -linkmode 'external' -extldflags '-Wl,-z,now'"
 
 # copy binary config and utils
 FROM openeuler/openeuler:22.03
@@ -22,8 +22,8 @@ RUN dnf -y update && \
 USER mindspore
 WORKDIR /opt/app/
 
-COPY  --chown=mindspore --from=BUILDER /go/src/github.com/opensourceways/xihe-extra-services/message-server/message-server /opt/app
+COPY  --chown=mindspore --from=BUILDER /go/src/github.com/opensourceways/xihe-message-server /opt/app
 
-RUN chmod 550 /opt/app/message-server
+RUN chmod 550 /opt/app/xihe-message-server
 
 ENTRYPOINT ["/opt/app/message-server"]

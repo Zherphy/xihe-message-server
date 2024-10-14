@@ -235,7 +235,8 @@ func trainingSubscribesMessage(log *logrus.Entry, cfg *configuration) error {
 			repositories.NewTrainingRepository(
 				mongodb.NewTrainingMapper(collections.Training),
 			),
-			nil, 0,
+			nil,
+			0,
 		),
 		kafka.SubscriberAdapter(),
 	)
