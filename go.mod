@@ -4,9 +4,11 @@ go 1.21
 
 require (
 	github.com/opensourceways/community-robot-lib v1.0.1
+	github.com/opensourceways/kafka-lib v0.0.0-20231114071554-b2af9944cf3a
 	github.com/opensourceways/xihe-extra-services v1.3.0
 	github.com/opensourceways/xihe-server v1.3.1
 	github.com/sirupsen/logrus v1.9.3
+	k8s.io/apimachinery v0.29.1
 )
 
 require (
@@ -61,7 +63,6 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/montanaflynn/stats v0.7.1 // indirect
-	github.com/opensourceways/kafka-lib v0.0.0-20231114071554-b2af9944cf3a // indirect
 	github.com/opensourceways/redis-lib v0.0.0-20231018083224-85bc8e32c7c0 // indirect
 	github.com/opensourceways/server-common-lib v0.0.0-20231027024402-f55c66e6699c // indirect
 	github.com/opensourceways/xihe-aicc-finetune v0.0.0-20231228122500-0440d3fb56e1 // indirect
@@ -94,6 +95,5 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gorm.io/driver/postgres v1.5.4 // indirect
 	gorm.io/gorm v1.25.5 // indirect
-	k8s.io/apimachinery v0.29.1 // indirect
 	sigs.k8s.io/yaml v1.4.0 // indirect
 )

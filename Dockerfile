@@ -22,8 +22,8 @@ RUN dnf -y update && \
 USER mindspore
 WORKDIR /opt/app/
 
-COPY  --chown=mindspore --from=BUILDER /go/src/github.com/opensourceways/xihe-message-server /opt/app
+COPY  --chown=mindspore --from=BUILDER /go/src/github.com/opensourceways/xihe-message-server/xihe-message-server /opt/app
 
 RUN chmod 550 /opt/app/xihe-message-server
 
-ENTRYPOINT ["/opt/app/message-server"]
+ENTRYPOINT ["/opt/app/xihe-message-server"]
